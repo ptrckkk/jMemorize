@@ -6,3 +6,7 @@ build
 
 # Automatically generated files regarding check style
 checkstyle_config/bin/
+
+# Ignore lessons and backuped lessons
+lessons
+lessons-bak

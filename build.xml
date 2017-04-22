@@ -125,6 +125,7 @@
     <target name="run" depends="compile" description="Starts the jMemorize application">
         <!-- backup your lesson dir. this is useful if you are playing around
 		with the lesson format.-->
+        <mkdir dir="lessons" />
         <copy todir="${lesson}-bak">
             <fileset dir="${lesson}" />
         </copy>
