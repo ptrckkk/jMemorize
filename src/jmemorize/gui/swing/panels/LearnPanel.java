@@ -309,7 +309,7 @@ public class LearnPanel extends JPanel implements SelectionProvider,
 
         // build it using FormLayout
         FormLayout layout = new FormLayout(
-            "center:170px:grow", // columns //$NON-NLS-1$
+            "center:200px:grow", // columns //$NON-NLS-1$
             "9dlu, p, 3dlu, p, 12dlu, p, 3dlu, p, 12dlu, p, 3dlu, " + //$NON-NLS-1$
             "p, 14dlu, fill:p:grow, 5dlu, p, 5dlu, p, 5px"); // rows //$NON-NLS-1$
         
