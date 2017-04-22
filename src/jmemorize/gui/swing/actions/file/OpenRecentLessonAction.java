@@ -21,6 +21,7 @@ package jmemorize.gui.swing.actions.file;
 import java.io.File;
 
 import jmemorize.core.Main;
+import jmemorize.core.Settings;
 import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
 import jmemorize.gui.swing.frames.MainFrame;
 

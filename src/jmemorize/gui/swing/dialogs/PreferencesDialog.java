@@ -95,6 +95,8 @@ public class PreferencesDialog extends JDialog
     private JComboBox m_langComboBox    = new JComboBox();
     private JCheckBox m_zippedLessonBox = new JCheckBox(
         Localization.get(LC.PREFERENCES_USE_GZIP));
+    private JCheckBox m_openLastOpenedFile = new JCheckBox(
+            Localization.get(LC.PREFERENCES_OPEN_LAST_FILE));
     
     private JButton   m_applyButton     = new JButton(Localization.get(LC.APPLY));
     
@@ -130,7 +132,8 @@ public class PreferencesDialog extends JDialog
         
         // etc
         m_zippedLessonBox.setSelected(Settings.loadIsSaveCompressed());
-        
+        m_openLastOpenedFile.setSelected(Settings.loadOpenLastFileAutomatically());
+
         // prepare lists/combobox
         updateListFromFont();
         updateFontPreview();
@@ -266,7 +269,7 @@ public class PreferencesDialog extends JDialog
         // build panel
         FormLayout layout = new FormLayout(
             "p, 9dlu, p:grow",      // columns //$NON-NLS-1$
-            "p, 3dlu, p, 9dlu, p"); // rows    //$NON-NLS-1$
+            "p, 3dlu, p, 9dlu, p, p"); // rows    //$NON-NLS-1$
         
         CellConstraints cc = new CellConstraints();
         
@@ -277,7 +280,8 @@ public class PreferencesDialog extends JDialog
         builder.addLabel(Localization.get(LC.PREFERENCES_LANG), cc.xy (1, 3));
         builder.add(m_langComboBox,                             cc.xy (3, 3));
         builder.add(m_zippedLessonBox,                          cc.xyw(1, 5, 3));
-        
+        builder.add(m_openLastOpenedFile,                       cc.xyw(1, 6, 3));
+
         return builder.getPanel();
     }
     
@@ -443,6 +447,7 @@ public class PreferencesDialog extends JDialog
         Settings.storeFont(FontType.TABLE_FLIP, m_fonts.get(5));
         
         Settings.storeSaveCompressed(m_zippedLessonBox.isSelected());
+        Settings.storeOpenLastFileAutomatically(m_openLastOpenedFile.isSelected());
     }
     
     /**

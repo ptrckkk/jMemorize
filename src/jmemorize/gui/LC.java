@@ -112,6 +112,7 @@ public interface LC
     public static final String PREFERENCES_FONT                       = "Preferences.FONT";
     public static final String PREFERENCES_SIZE                       = "Preferences.SIZE";
     public static final String PREFERENCES_USE_GZIP                   = "Preferences.USE_GZIP";
+    public static final String PREFERENCES_OPEN_LAST_FILE             = "Preferences.OPEN_LAST_FILE";
     /** since 1.3.0 */
     public static final String PREFERENCES_VERT_ALIGN                 = "Preferences.VERT_ALIGN";
     /** since 1.3.0 */
