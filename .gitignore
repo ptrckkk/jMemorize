@@ -1,0 +1,8 @@
+# IntelliJ files
+.idea
+
+# Build output
+build
+
+# Automatically generated files regarding check style
+checkstyle_config/bin/
