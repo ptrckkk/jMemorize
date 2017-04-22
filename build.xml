@@ -88,17 +88,7 @@
             basedir="${checks-bin}"/>
     </target>
 
-    <!-- Checkstyle target : run the checks on all the source code -->
-    <target name="checkstyle" depends="build-checks">
-        <taskdef resource="checkstyletask.properties">
-	    <classpath refid="checks.run.class.path"/>
-	</taskdef>
-        <checkstyle config="${checks-base}/jmemorize-checkstyle.xml">
-	    <fileset dir="src/jmemorize" includes="**/*.java"/>
-	</checkstyle>    
-    </target>
-
-    <target name="compile" depends="init, checkstyle" description="Compile the source">
+    <target name="compile" depends="init" description="Compile the source">
         <mkdir dir="${build}" />
 
         <!-- Compile the java code from ${src} into ${build} -->
@@ -133,7 +123,7 @@
     </target>
 
     <target name="run" depends="compile" description="Starts the jMemorize application">
-        <!-- backup your lesson dir. this is usefull if you are playing around 
+        <!-- backup your lesson dir. this is useful if you are playing around
 		with the lesson format.-->
         <copy todir="${lesson}-bak">
             <fileset dir="${lesson}" />
