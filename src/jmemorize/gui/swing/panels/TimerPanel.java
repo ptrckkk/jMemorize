@@ -94,6 +94,14 @@ public class TimerPanel extends JPanel implements ActionListener
     }
 
     /**
+     * Resumes the timer.
+     */
+    public void resume()
+    {
+        m_timer.start();
+    }
+
+    /**
      * Is called every second and updates the timer representation.
      */
     public void actionPerformed(ActionEvent evt)

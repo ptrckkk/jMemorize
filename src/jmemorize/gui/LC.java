@@ -130,6 +130,8 @@ public interface LC
     public static final String LEARN_YES                              = "Learn.YES";
     public static final String LEARN_NO                               = "Learn.NO";
     public static final String LEARN_STOP                             = "Learn.STOP";
+    public static final String LEARN_TIMER_STOP                       = "Learn.TIMER_STOP";
+    public static final String LEARN_TIMER_RESUME                     = "Learn.TIMER_RESUME";
     public static final String LEARN_SHOW_CATEGORY                    = "Learn.SHOW_CATEGORY";
     public static final String LEARN_FLIPPED                          = "Learn.FLIPPED_CARD_SIDES";
     public static final String LEARN_REMEMBER                         = "Learn.REMEMBER_THE_ANSWER";

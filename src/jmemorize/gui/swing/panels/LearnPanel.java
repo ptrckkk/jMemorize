@@ -74,6 +74,29 @@ public class LearnPanel extends JPanel implements SelectionProvider,
             m_session.endLearning();
         }
     }
+
+    private class ToggleTimerAction extends AbstractAction2
+    {
+        public ToggleTimerAction()
+        {
+            setName(Localization.get(LC.LEARN_TIMER_STOP));
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            if (!m_is_timer_stopped)
+            {
+                m_timerPanel.stop();
+                setName(Localization.get(LC.LEARN_TIMER_RESUME));
+            }
+            else
+            {
+                m_timerPanel.resume();
+                setName(Localization.get(LC.LEARN_TIMER_STOP));
+            }
+            m_is_timer_stopped = !m_is_timer_stopped;
+        }
+    }
     
     private LearnSession      m_session;
     private Card              m_currentCard;
@@ -91,11 +114,12 @@ public class LearnPanel extends JPanel implements SelectionProvider,
     private JLabel                  m_currentCardProgressLabel;
     private JProgressBar            m_currentCardProgressBar;
     private boolean                 m_isPartialProgressMode;
+    private boolean                 m_is_timer_stopped;
 
     private StatusBar               m_statusBar;
     private List<SelectionObserver> m_selectionListeners = new LinkedList<SelectionObserver>();
-    
-    public LearnPanel() 
+
+    public LearnPanel()
     {
         initComponents();
         Main.getInstance().addLearnSessionObserver(this);
@@ -132,6 +156,7 @@ public class LearnPanel extends JPanel implements SelectionProvider,
         
         m_isPartialProgressMode = settings.getSidesMode() == LearnSettings.SIDES_BOTH &&
             (sidesToTest > 1);
+        m_is_timer_stopped = false;
         
         m_currentCardProgressLabel.setVisible(m_isPartialProgressMode);
         m_currentCardProgressBar.setVisible(m_isPartialProgressMode);
@@ -278,13 +303,15 @@ public class LearnPanel extends JPanel implements SelectionProvider,
         m_currentCardProgressBar.setPreferredSize(new Dimension(140, 22));
         
         m_cardCounterPanel.setBackground(ColorConstants.SIDEBAR_COLOR);
+
+        JButton toggleTimerButton = new JButton(new ToggleTimerAction());
         JButton stopLearningButton = new JButton(new StopAction());
-        
+
         // build it using FormLayout
         FormLayout layout = new FormLayout(
             "center:170px:grow", // columns //$NON-NLS-1$
             "9dlu, p, 3dlu, p, 12dlu, p, 3dlu, p, 12dlu, p, 3dlu, " + //$NON-NLS-1$
-            "p, 12dlu, fill:p:grow, 5dlu, p, 5px"); // rows //$NON-NLS-1$
+            "p, 14dlu, fill:p:grow, 5dlu, p, 5dlu, p, 5px"); // rows //$NON-NLS-1$
         
         CellConstraints cc = new CellConstraints();
         
@@ -299,8 +326,9 @@ public class LearnPanel extends JPanel implements SelectionProvider,
         builder.add(m_currentCardProgressLabel,            cc.xy(1, 10));
         builder.add(m_currentCardProgressBar,              cc.xy(1, 12));
         builder.add(m_flippedLabel,                        cc.xy(1, 14));
-        builder.add(stopLearningButton,                    cc.xy(1, 16));
-        
+        builder.add(toggleTimerButton,                     cc.xy(1, 16));
+        builder.add(stopLearningButton,                    cc.xy(1, 18));
+
         JPanel sidePanel = builder.getPanel();
         sidePanel.setBackground(ColorConstants.SIDEBAR_COLOR);
         sidePanel.setBorder(new EtchedBorder());

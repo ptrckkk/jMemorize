@@ -1,4 +1,4 @@
-
+Karte zur
  This file lists all changes to the translation keys in the version of 
  jMemorize.
 
