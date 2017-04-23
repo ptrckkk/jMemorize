@@ -3,6 +3,8 @@
 
 # Build output
 build
+dist
+dist-bin-temp
 
 # Automatically generated files regarding check style
 checkstyle_config/bin/
