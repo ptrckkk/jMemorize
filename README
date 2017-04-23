@@ -52,6 +52,14 @@
     
     I'm using icons from the Eclipse project (http://eclipse.org) and from 
     Mark James's excellent Silk icon set (http://famfamfam.com/lab/icons/silk).
-    
+
+  4.
+
+    This fork currently extends the original jMemorize by the following
+    features/functionality
+    - The preferences provide the option to automatically load the previously-loaded
+      file when the application is started.
+    - The timer that counts the past time during a learning session can be stopped and resumed.
+
   Have fun.
   
