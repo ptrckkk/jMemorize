@@ -99,7 +99,7 @@ public class QuizPanel extends JPanel implements Events,
         public SkipAction()
         {
             setName(Localization.get(LC.LEARN_SKIP));
-            setFocusedWindowShortcut("skipButton", 's'); //$NON-NLS-1$
+            setFocusedWindowShortcut("m_skipButton", 's'); //$NON-NLS-1$
         }
         
         public void actionPerformed(ActionEvent e)
@@ -129,7 +129,7 @@ public class QuizPanel extends JPanel implements Events,
         public NoAction()
         {
             setName(Localization.get(LC.LEARN_NO));
-            setFocusedWindowShortcut("noButton", 'w'); //$NON-NLS-1$
+            setFocusedWindowShortcut("m_noButton", 'w'); //$NON-NLS-1$
         }
         
         public void actionPerformed(ActionEvent e)
@@ -145,6 +145,8 @@ public class QuizPanel extends JPanel implements Events,
     //  swing elements
     private JButton           m_showButton        = new JButton(new ShowAction());
     private JButton           m_yesButton         = new JButton(new YesAction());
+    private JButton           m_skipButton          = new JButton(new SkipAction());
+    private JButton           m_noButton            = new JButton(new NoAction());
     
     private TwoSidesCardPanel m_questionCardPanel = new TwoSidesCardPanel(false, false);
     private Quiz              m_quiz              = new ThinkQuiz();
@@ -234,6 +236,21 @@ public class QuizPanel extends JPanel implements Events,
     public void onCategoryEvent(int type, Category category)
     {
         assert false; // no category events should occur while learning
+    }
+
+    public void enableQuizPanelButtons() {
+        toggleQuitPanelEnabled(true);
+    }
+
+    public void disableQuizPanelButtons() {
+        toggleQuitPanelEnabled(false);
+    }
+
+    private void toggleQuitPanelEnabled(boolean isEnabled) {
+        m_showButton.setEnabled(isEnabled);
+        m_yesButton.setEnabled(isEnabled);
+        m_skipButton.setEnabled(isEnabled);
+        m_noButton.setEnabled(isEnabled);
     }
 
     private void updateFonts()
@@ -381,8 +398,6 @@ public class QuizPanel extends JPanel implements Events,
     
     private JPanel buildQuestionButtonBar()
     {
-        JButton skipButton = new JButton(new SkipAction());
-        
         // build it using forms layout
         FormLayout layout = getBottomFormLayout();
         CellConstraints cc = new CellConstraints();
@@ -392,16 +407,13 @@ public class QuizPanel extends JPanel implements Events,
         
         builder.addLabel(m_quiz.getHelpText(), cc.xy(1, 1));
         builder.add(m_showButton, cc.xy(3,1));
-        builder.add(skipButton,   cc.xy(5,1));
+        builder.add(m_skipButton, cc.xy(5,1));
         
         return builder.getPanel();
     }
     
     private JPanel buildAnswerButtonBar()
     {
-        // preapre no button
-        JButton noButton = new JButton(new NoAction());
-        
         // build it using forms layout
         FormLayout layout = getBottomFormLayout();
         CellConstraints cc = new CellConstraints();
@@ -411,7 +423,7 @@ public class QuizPanel extends JPanel implements Events,
         
         builder.addLabel(Localization.get(LC.LEARN_DID_YOU_KNOW), cc.xy(1,1));
         builder.add(m_yesButton, cc.xy(3,1));
-        builder.add(noButton,    cc.xy(5,1));
+        builder.add(m_noButton,  cc.xy(5,1));
         
         return builder.getPanel();
     }

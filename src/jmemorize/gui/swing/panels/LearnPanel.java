@@ -87,11 +87,13 @@ public class LearnPanel extends JPanel implements SelectionProvider,
             if (!m_is_timer_stopped)
             {
                 m_timerPanel.stop();
+                quizPanel.disableQuizPanelButtons();
                 setName(Localization.get(LC.LEARN_TIMER_RESUME));
             }
             else
             {
                 m_timerPanel.resume();
+                quizPanel.enableQuizPanelButtons();
                 setName(Localization.get(LC.LEARN_TIMER_STOP));
             }
             m_is_timer_stopped = !m_is_timer_stopped;
@@ -100,7 +102,10 @@ public class LearnPanel extends JPanel implements SelectionProvider,
     
     private LearnSession      m_session;
     private Card              m_currentCard;
-    
+
+    private JPanel            mainPanel;
+    private QuizPanel         quizPanel;
+
     private TimerPanel        m_timerPanel        = new TimerPanel();
     private CardCounterPanel  m_cardCounterPanel  = new CardCounterPanel();
     
@@ -276,9 +281,11 @@ public class LearnPanel extends JPanel implements SelectionProvider,
     
     private void initComponents() 
     {
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel = new JPanel(new BorderLayout());
+        quizPanel = new QuizPanel();
+
         mainPanel.add(buildSidebarPanel(), BorderLayout.WEST);
-        mainPanel.add(new QuizPanel(), BorderLayout.CENTER);
+        mainPanel.add(quizPanel, BorderLayout.CENTER);
         
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
